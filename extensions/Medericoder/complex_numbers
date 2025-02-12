@@ -1,0 +1,484 @@
+// Name: Complex Numbers
+// ID: complexnumbers
+// Description: A bunck of blocks related to complex numbers in maths.
+// By: Medericoder <https://scratch.mit.edu/users/Medericoder/>
+// Original: Medericoder
+// License: MPL-2.0
+
+(function(Scratch) {
+    'use strict';
+
+
+    function loadScript(url, callback) {
+        var script = document.createElement('script');
+        script.src = url;
+        script.onload = callback;
+        script.onerror = function() {
+            console.error('Error while script loading:', url);
+        };
+        document.head.appendChild(script);
+    }
+
+
+    function initExtension() {
+        class ComplexNumbers {
+            getInfo() {
+                return {
+                    color1: "#7daa5a",
+                    color2: "#7daa5a",
+                    id: 'complexnumbers',
+                    name: 'Complex Numbers',
+                    blocks: [
+                        {
+                            opcode: 'evaluate',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] + [B]i',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.NUMBER,
+                                    defaultValue: '1'
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.NUMBER,
+                                    defaultValue: '2'
+                                }
+                            }
+                        }, "---",
+                        {
+                            opcode: 'addition',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] + [B]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '3+4i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'substraction',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] - [B]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '3+4i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'multiplication',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] * [B]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '3+4i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'division',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] / [B]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '3+4i'
+                                }
+                            }
+                        }, "---",
+                        {
+                            opcode: 'real',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 're [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'imaginary',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'im [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'conjugate',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'conj [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'norm',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '|[A]|',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'argument',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'arg [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: '1+2i'
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'exponential',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'exp [A]i',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.NUMBER,
+                                    defaultValue: math.pi.toString()
+                                }
+                            }
+                        }, "---",
+                        {
+                            opcode: 'normalize',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'normalize [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: "1+2i"
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'power',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: '[A] ^ [B]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: "1+2i"
+                                },
+                                B: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: "3+4i"
+                                }
+                            }
+                        },
+                        {
+                            opcode: 'logarithm',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'ln [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    defaultValue: "1+2i"
+                                }
+                            }
+                        }, "...",
+                        {
+                            opcode: 'constant',
+                            blockType: Scratch.BlockType.REPORTER,
+                            text: 'const [A]',
+                            arguments: {
+                                A: {
+                                    type: Scratch.ArgumentType.STRING,
+                                    menu: "MENU"
+                                }
+                            }
+                        }                                                    
+                    ],
+                    menus: {
+                        MENU:{
+                            acceptReporters: true,
+                            items: ["pi", "e", "sqrt(2)", "sqrt(3)", "phi", "gamma", "true", "false", "Infinity", "-Infinity", "NaN"]
+                        }
+                    }
+                };
+            }
+
+            /**
+             * Convert a couple of real numbers to a complex number.
+             * @param {object} args Two real numbers.
+             * @returns {string} A complex number (string).
+             */
+            evaluate(args) {
+                try {
+                    // Créer des nombres complexes à partir des chaînes fournies
+                    const c = math.complex(String(args.A)+"+"+String(args.B)+"i");
+                    return c.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Sum of two complex numbers.
+             * @param {object} args Two complex numbers.
+             * @returns {string} A complex number (string).
+             */
+            addition(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.complex(args.B);
+                    const c3 = math.add(c1, c2);
+                    return c3.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Difference of two complex numbers.
+             * @param {object} args Two complex numbers.
+             * @returns {string} A complex number (string).
+             */
+            substraction(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.complex(args.B);
+                    const c3 = math.subtract(c1, c2);
+                    return c3.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Product of two complex numbers.
+             * @param {object} args Two complex numbers.
+             * @returns {string} A complex number (string).
+             */
+            multiplication(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.complex(args.B);
+                    const c3 = math.multiply(c1, c2);
+                    return c3.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Quotient of two complex numbers, the second is non-zero.
+             * @param {object} args Two complex numbers.
+             * @returns {string} A complex number (string).
+             */
+            division(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.complex(args.B);
+                    const c3 = math.divide(c1, c2);
+                    return c3.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Real part of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A real number (float).
+             */
+            real(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.re(c1);
+                    return parseFloat(c2);
+                } catch (e) {
+                    return e;
+                }
+            }            
+
+            /**
+             * Imaginary part of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A real number (float).
+             */
+            imaginary(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.im(c1);
+                    return parseFloat(c2);
+                } catch (e) {
+                    return e;
+                }
+            }
+            
+            /**
+             * Conjugate of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A complex number (string).
+             */
+            conjugate(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.conj(c1);
+                    return c2.toString();
+                } catch (e) {
+                    return e;
+                }
+            } 
+
+            /**
+             * Norm of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A positive real number (float).
+             */
+            norm(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.abs(c1);
+                    return parseFloat(c2);
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Main argument (rad) in ]-pi ; pi] of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A real number between ]-pi ; pi] (float).
+             */
+            argument(args) {
+                try {
+                    const c1 = math.complex(args.A);
+                    const c2 = math.arg(c1);
+                    return parseFloat(c2);
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Convert a complex exponential form to an algebric form.
+             * @param {object} args A real number.
+             * @returns {string} A complex (string).
+             */
+            exponential(args) {
+                try {
+                    const c1 = math.complex(args.A.toString()+"i");
+                    const c2 = math.exp(c1);
+                    return c2.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Normalize a complex number.
+             * @param {object} args A complex number (non-zero).
+             * @returns {string} A complex number (string).
+             */
+            normalize(args) {
+                try {
+                    const c1 = math.complex(args.A.toString());
+                    const c2 = math.divide(c1, math.abs(c1));
+                    return c2.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Powers of two complex numbers.
+             * @param {object} args Two complex numbers.
+             * @returns {string} A complex number (string).
+             */
+            power(args) {
+                try {
+                    const c1 = math.complex(args.A.toString());
+                    const c2 = math.complex(args.B.toString());
+                    const c3 = math.log(math.abs(c1));
+                    const c4 = math.complex(math.arg(c1).toString());
+                    const c5 = math.complex(c3.toString() + "+" + c4.toString() + "i");
+                    const c6 = math.exp(math.multiply(c2, c5));
+                    return c6.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Natural logarithm of a complex number.
+             * @param {object} args A complex number.
+             * @returns {string} A complex number (string).
+             */
+            logarithm(args) {
+                try {
+                    const c1 = math.complex(args.A.toString());
+                    const c2 = math.log(math.abs(c1));
+                    const c3 = math.complex(math.arg(c1).toString());
+                    const c4 = math.complex(c2.toString() + "+" + c3.toString() + "i");
+                    return c4.toString();
+                } catch (e) {
+                    return e;
+                }
+            }
+
+            /**
+             * Constant.
+             * @param {object} args A constant.
+             * @returns {string} A constant (float).
+             */
+            constant(args) {
+                try {
+                    if (args.A == "pi") {return math.pi;}
+                    else if (args.A == "e") {return math.e;}
+                    else if (args.A == "sqrt(2)") {return 1.4142135623730950488;}
+                    else if (args.A == "sqrt(3)") {return 1.7320508075688772935;}
+                    else if (args.A == "phi") {return 1.6180339887498948482;}
+                    else if (args.A == "gamma") {return 0.57721566490153286;}
+                    else if (args.A == "true") {return "true";}
+                    else if (args.A == "false") {return "false";}
+                    else if (args.A == "Infinity") {return "Infinity";}
+                    else if (args.A == "-Infinity") {return "-Infinity";}
+                    else {return "NaN";}                 
+                } catch (e) {
+                    return e;
+                }
+            }
+
+        }
+
+        Scratch.extensions.register(new ComplexNumbers());
+    }
+
+    if (typeof math === 'undefined') {
+        loadScript('https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.min.js', initExtension);
+    } else {
+        initExtension();
+    }
+})(Scratch);
